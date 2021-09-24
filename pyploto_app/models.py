@@ -1,9 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+class User(AbstractUser):
+    profile_picture = models.ImageField()
 
 class Post(models.Model):
-    media = models.ImageField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
+    media = models.ImageField(upload_to='posts/')
     title = models.CharField(max_length=255)
-    author = models.CharField(max_length=255)
     caption = models.TextField()
     likes = models.IntegerField()
     datetime = models.DateTimeField()
@@ -13,6 +17,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
     datetime = models.DateTimeField()
     body = models.TextField()
 
