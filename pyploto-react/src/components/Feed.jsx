@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import axiosInstance from '../axios.js'
 
 function Feed(props) {
 
     const [posts, setPosts] = useState([])
 
-    useEffect(() => {
-
-        const url = 'http://localhost:8000/posts/'
+    function getPosts() {
         
-        fetch(url)
+        axiosInstance.get('/posts/')
         .then(res => res.json())
         .then(data => {
+            console.log(data)
             setPosts(data)
         })
-    }, [])
-    console.log(posts)
+        .catch(err => console.error)
+    }
+    useEffect(() => getPosts(), [])
+
     if (posts) {
 
         const feed = posts.map(post => {
-            console.log(post)
             return (
                 <div key={post.id}>
-                    <p>{post.id}</p>
                     <p>{post.title}</p>
                     <p>{post.media}</p>
                     <p>{post.likes}</p>
@@ -32,6 +32,7 @@ function Feed(props) {
         })
         return (
             <div>
+                <h1>Post</h1>
                 {feed}
             </div>
         )
