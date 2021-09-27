@@ -113,15 +113,6 @@ WSGI_APPLICATION = 'pyploto_proj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'pyploto',
-#         'USER': 'pyplotouser',
-#         'PASSWORD': 'pyploto',
-#         'HOST': 'localhost'
-#     }
-# }
 DATABASES = {
   'default': dj_database_url.config(conn_max_age=600)
 }
