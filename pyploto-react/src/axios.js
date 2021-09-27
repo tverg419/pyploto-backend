@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8000/api',
+    baseURL: 'http://localhost:8000/api/',
     timeout: 5000,
     headers: {
         "Authorization": "JWT " + localStorage.getItem('access_token'),
@@ -9,6 +9,7 @@ const axiosInstance = axios.create({
         "accept": "application/json"
     }    
 })
+
 axiosInstance.interceptors.response.use(response => response,
     error => {
         const originalRequest = error.config

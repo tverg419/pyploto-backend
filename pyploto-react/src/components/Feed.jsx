@@ -5,25 +5,19 @@ function Feed(props) {
 
     const [posts, setPosts] = useState([])
 
-    function getPosts() {
-        
-        axiosInstance.get('/posts/')
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            setPosts(data)
-        })
+    async function getPosts() {
+        await axiosInstance.get('posts/')
+        .then(res => res.data)
+        .then(data => setPosts(data))
         .catch(err => console.error)
     }
     useEffect(() => getPosts(), [])
-
     if (posts) {
 
         const feed = posts.map(post => {
             return (
                 <div key={post.id}>
-                    <p>{post.title}</p>
-                    <p>{post.media}</p>
+                    <img src='https://i.ebayimg.com/images/g/~NcAAOSwTC1eQoGe/s-l640.jpg' alt='post'/>
                     <p>{post.likes}</p>
                     <p>{post.caption}</p>
                 </div>
@@ -32,7 +26,6 @@ function Feed(props) {
         })
         return (
             <div>
-                <h1>Post</h1>
                 {feed}
             </div>
         )
