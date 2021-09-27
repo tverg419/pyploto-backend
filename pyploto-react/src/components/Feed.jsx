@@ -16,10 +16,12 @@ function Feed(props) {
 
         const feed = posts.map(post => {
             return (
-                <div key={post.id}>
+                <div key={post.id} className='post-card'>
                     <img src='https://i.ebayimg.com/images/g/~NcAAOSwTC1eQoGe/s-l640.jpg' alt='post'/>
-                    <p>{post.likes}</p>
-                    <p>{post.caption}</p>
+                    <div className='post-details'>
+                        <p>{post.likes}</p>
+                        <p>{post.caption}</p>
+                    </div>
                 </div>
 
             )

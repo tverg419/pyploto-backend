@@ -32,13 +32,11 @@ function Login(props) {
     }
 
     return (
-        <div>
+        <div className='form login-form'>
             <h1> Login</h1>
             <form onSubmit={handleSubmit}>
-                <label htmlFor='username'>Username: </label>
-                <input type='text' name='username' value={login.username} onChange={handleChange}></input>
-                <label htmlFor='password'>Password: </label>
-                <input type='password' name='password'value={login.password}onChange={handleChange}></input>
+                <input type='text' name='username' placeholder='Username' value={login.username} onChange={handleChange}></input>
+                <input type='password' name='password' placeholder='Password' value={login.password}onChange={handleChange}></input>
                 <button type='submit'>Submit</button>      
             </form>
         </div>

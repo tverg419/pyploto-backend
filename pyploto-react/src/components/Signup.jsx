@@ -17,9 +17,9 @@ function Signup(props) {
         setForm({...form, [event.target.name]: event.target.value})
     }
     
-    const handleSubmit = (event) => {
+    async function handleSubmit(event) {
         event.preventDefault()
-        axiosInstance.post('/users/create/',
+        await axiosInstance.post('/users/create/',
         {
             email: form.email,
             first_name: form.first_name,
@@ -46,19 +46,14 @@ function Signup(props) {
     }
 
     return (
-        <div>
+        <div className='form signup-form'>
             <h1>Sign-Up</h1>
             <form onSubmit={handleSubmit}>
-                <label htmlFor='email'>Email: </label>
-                <input type='email' name='email' value={form.email} onChange={handleChange}></input>
-                <label htmlFor='first_name'>First Name: </label>
-                <input type='text' name='first_name' value={form.first_name} onChange={handleChange}></input>
-                <label htmlFor='last_name'>Last Name: </label>
-                <input type='text' name='last_name' value={form.last_name} onChange={handleChange}></input>
-                <label htmlFor='username'>Username: </label>
-                <input type='text' name='username' value={form.username} onChange={handleChange}></input>
-                <label htmlFor='password'>Password: </label>
-                <input type='password' name='password'value={form.password}onChange={handleChange}></input>
+                <input type='email' name='email' placeholder='Email' value={form.email} onChange={handleChange}></input>
+                <input type='text' name='first_name' placeholder='First Name'value={form.first_name} onChange={handleChange}></input>
+                <input type='text' name='last_name' placeholder='Last Name' value={form.last_name} onChange={handleChange}></input>
+                <input type='text' name='username' placeholder='Username' value={form.username} onChange={handleChange}></input>
+                <input type='password' name='password' placeholder='Password' value={form.password}onChange={handleChange}></input>
                 <button type='submit'>Submit</button>                
             </form>
         </div>

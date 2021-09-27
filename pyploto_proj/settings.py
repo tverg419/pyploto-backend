@@ -23,11 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ['SECRET_KEY'] if os.environ['MODE'] == 'prod' else 'django-insecure-miz7ijp&t^pp$w@jwat5tkhu#0y=y3sx)5)1ehz96dl!9b(!^8'
-SECRET_KEY = 'django-insecure-miz7ijp&t^pp$w@jwat5tkhu#0y=y3sx)5)1ehz96dl!9b(!^8'
+SECRET_KEY = os.environ['SECRET_KEY']
+
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True if os.environ['MODE'] == 'dev' else False
-DEBUG = True
+DEBUG = True if os.environ['MODE'] == 'dev' else False
+
 ALLOWED_HOSTS = ['*']
 
 
@@ -59,7 +59,8 @@ MIDDLEWARE = [
 
 # Django Cors Headers
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "http://127.0.0.1:3000"
 ]
 
 # Django REST Framework
@@ -112,18 +113,18 @@ WSGI_APPLICATION = 'pyploto_proj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pyploto',
-        'USER': 'pyplotouser',
-        'PASSWORD': 'pyploto',
-        'HOST': 'localhost'
-    }
-}
 # DATABASES = {
-#   'default': dj_database_url.config(conn_max_age=600)
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'pyploto',
+#         'USER': 'pyplotouser',
+#         'PASSWORD': 'pyploto',
+#         'HOST': 'localhost'
+#     }
 # }
+DATABASES = {
+  'default': dj_database_url.config(conn_max_age=600)
+}
 # Custom User Model
 AUTH_USER_MODEL = 'pyploto_app.User'
 

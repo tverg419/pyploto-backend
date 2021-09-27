@@ -1,0 +1,1 @@
+web: gunicorn pyploto_proj.wsgi
