@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.environ['MODE'] == 'dev' else False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -65,12 +65,15 @@ CORS_ALLOWED_ORIGINS = [
 
 # Django REST Framework
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ), 
+    ),
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#     'rest_framework.authentication.SessionAuthentication',
+# ), 
 }
 
 # JavaScript Web Token
@@ -112,10 +115,18 @@ WSGI_APPLICATION = 'pyploto_proj.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
-  'default': dj_database_url.config(conn_max_age=600)
+    "default": {
+        "ENGINE": 'django.db.backends.postgresql',
+        'NAME': 'pyploto',
+        "USER": 'pyplotouser',
+        "PASSWORD": 'pyploto',
+        "HOST": 'localhost'
+    }  
 }
+# DATABASES = {
+#   'default': dj_database_url.config(conn_max_age=600)
+# }
 # Custom User Model
 AUTH_USER_MODEL = 'pyploto_app.User'
 
