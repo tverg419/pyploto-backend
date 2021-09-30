@@ -58,11 +58,11 @@ MIDDLEWARE = [
 ]
 
 # Django Cors Headers
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000"
-]
-
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3000"
+# ]
+CORS_ALLOW_ALL_ORIGINS = True
 # Django REST Framework
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': (
