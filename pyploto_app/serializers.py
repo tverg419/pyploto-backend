@@ -11,12 +11,12 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email','first_name','last_name','username','password')
+        fields = ('id','email','first_name','last_name','username','password')
         extra_kwargs = {'write_only': True}
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)
-        instance = self.Meta.model(**validated_data)  # as long as the fields are the same, we can just use this
+        instance = self.Meta.model(**validated_data)
         if password is not None:
             instance.set_password(password)
         instance.save()
@@ -25,9 +25,9 @@ class UserSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = "__all__"
+        fields = ('post_id','author', 'title', 'media', 'caption')
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = "__all__"
+        fields = ('id','post_id', 'author_id', 'body')

@@ -58,19 +58,19 @@ MIDDLEWARE = [
 ]
 
 # Django Cors Headers
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000"
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Django REST Framework
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ), 
+    ),
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#     'rest_framework.authentication.SessionAuthentication',
+# ), 
 }
 
 # JavaScript Web Token
@@ -112,10 +112,10 @@ WSGI_APPLICATION = 'pyploto_proj.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
-  'default': dj_database_url.config(conn_max_age=600)
+    "default": dj_database_url.config(conn_max_age=600)
 }
+
 # Custom User Model
 AUTH_USER_MODEL = 'pyploto_app.User'
 
@@ -156,10 +156,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT=os.path.join(BASE_DIR, "static/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-STATIC_ROOT=os.path.join(BASE_DIR, "static/")

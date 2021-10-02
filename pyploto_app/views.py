@@ -36,20 +36,29 @@ class LogoutUser(APIView):
         token = RefreshToken(refresh_token)
         token.blacklist()
         return Response(status=status.HTTP_205_RESET_CONTENT)
+
 # post views
-class PostList(generics.ListCreateAPIView):
+class PostListCreate(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+class PostRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    lookup_field = 'post_id'
 
 # comment views
-class CommentList(generics.ListCreateAPIView):
-    queryset = Comment.objects.all()
+class CommentListCreate(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
 
-class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
+    def get_queryset(self):
+        queryset = Comment.objects.filter(post_id = self.request.query_params['post_id'])
+        return queryset
+
+class CommentRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+    lookup_field = 'id'
+
+        # print((self.request.query_params['author_id']))
+        # print(vars(self.request).keys())

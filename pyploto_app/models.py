@@ -5,21 +5,22 @@ class User(AbstractUser):
     profile_picture = models.ImageField()
 
 class Post(models.Model):
+    post_id = models.AutoField(primary_key=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
-    media = models.ImageField(upload_to='posts/')
+    media = models.TextField()
     title = models.CharField(max_length=255)
     caption = models.TextField()
-    likes = models.IntegerField()
-    datetime = models.DateTimeField()
+    # likes = models.IntegerField(default=0)
+    # datetime = models.DateTimeField()
 
     def __str__(self):
         return self.title
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
-    datetime = models.DateTimeField()
+    post_id = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    author_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
     body = models.TextField()
+    # datetime = models.DateTimeField()
 
     def __str__(self):
         return self.body
