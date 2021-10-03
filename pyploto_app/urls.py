@@ -10,7 +10,7 @@ urlpatterns = [
     path('blacklist/',     views.LogoutUser.as_view(),              name='token-blacklist'),
     # User paths
     path('users/',              views.UserList.as_view(),   name='user-list'),
-    path('users/<int:id>', views.UserDetail.as_view(), name='post-detail'),
+    path('users/<int:id>',      views.UserDetail.as_view(), name='user-detail'),
     path('users/create/',       views.UserCreate.as_view(), name='user-create'),
     # Posts paths
     path('posts/',              views.PostListCreate.as_view(),            name='post-list'),
