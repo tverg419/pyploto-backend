@@ -13,7 +13,12 @@ class UserList(APIView):
     def get(self, request):
         users = User.objects.all()
         return Response(users)
-        
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    lookup_field = 'id'
+
 class UserCreate(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = ()
