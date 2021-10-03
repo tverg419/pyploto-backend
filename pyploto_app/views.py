@@ -19,6 +19,10 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     lookup_field = 'id'
 
+class UserDetailUsername(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    lookup_field = 'username'
 class UserCreate(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = ()
