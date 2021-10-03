@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id','email','first_name','last_name','username','password')
+        fields = ('id','email','first_name','last_name','username','password','profile_picture')
         extra_kwargs = {'write_only': True}
 
     def create(self, validated_data):
@@ -25,7 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('post_id','author', 'title', 'media', 'caption')
+        fields = ('post_id','author', 'title', 'media', 'caption','datetime_modified')
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
