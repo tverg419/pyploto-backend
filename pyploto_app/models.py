@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from cloudinary.models import CloudinaryField
 
 class User(AbstractUser):
-    profile_picture = CloudinaryField('image')
+    profile_picture = CloudinaryField('image', blank=True)
 
 class Post(models.Model):
     post_id = models.AutoField(primary_key=True)
