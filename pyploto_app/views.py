@@ -7,17 +7,18 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import User, Post, Comment
 from .serializers import UserSerializer, PostSerializer, CommentSerializer
+from pyploto_app import serializers
 
 # user views
-class UserList(APIView):
-    def get(self, request):
-        users = User.objects.all()
-        return Response(users)
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     lookup_field = 'id'
+
 
 class UserDetailUsername(generics.RetrieveAPIView):
     queryset = User.objects.all()
@@ -51,10 +52,16 @@ class PostListCreate(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
+    
+
 class PostRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Post.objects.all()
+
     serializer_class = PostSerializer
-    lookup_field = 'post_id'
+    lookup_field = 'pk'
+
+    def get_queryset(self):
+        pk = self.kwargs['pk']
+        return Post.objects.filter(id=pk)
 
 # comment views
 class CommentListCreate(generics.ListCreateAPIView):
@@ -71,3 +78,11 @@ class CommentRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
 
         # print((self.request.query_params['author_id']))
         # print(vars(self.request).keys())
+    #     # Overrides the base class
+    # def get_queryset(self):
+    #     # kwargs are passed from the url
+    #     id = self.kwargs['id']
+    #     queryset = User.objects.all()
+    #     for query in queryset:
+    #         print(query)
+    #     return Response(id)

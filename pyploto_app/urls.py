@@ -10,12 +10,12 @@ urlpatterns = [
     path('blacklist/',     views.LogoutUser.as_view(),              name='token-blacklist'),
     # User paths
     path('users/',              views.UserList.as_view(),   name='user-list'),
-    path('users/<int:id>',      views.UserDetail.as_view(), name='user-detail'),
-    path('users/<str:username>',views.UserDetailUsername.as_view(), name='user-detail-username'),
+    path('users/<str:username>',views.UserDetail.as_view(), name='user-detail'),
     path('users/create/',       views.UserCreate.as_view(), name='user-create'),
     # Posts paths
-    path('posts/',              views.PostListCreate.as_view(),            name='post-list'),
-    path('posts/<int:post_id>', views.PostRetrieveUpdateDestroy.as_view(), name='post-detail'),
+    path('posts/',              views.PostList.as_view(),                  name='post-list'),
+    path('posts/create',        views.PostCreate.as_view(),                name='post-create'),
+    path('posts/<int:pk>',      views.PostRetrieveUpdateDestroy.as_view(), name='post-detail'),
     # Comments paths
     path('comments/',         views.CommentListCreate.as_view(),            name='comment-list'),
     path('comments/<int:id>', views.CommentRetrieveUpdateDestroy.as_view(), name='comment-detail')
